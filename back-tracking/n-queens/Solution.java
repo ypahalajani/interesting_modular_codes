@@ -1,5 +1,5 @@
 //INPUT: a dimension of chessboard
-//OUPUT: all possible permutation of n-queen solution
+//OUTPUT: all possible permutation of n-queen solution
 //Note: that the '.'(dot or period) represents the empty spaces on the chessboard
 //Note: and, the 'Q' represents the position of 'n' Queens.
 
@@ -12,8 +12,8 @@ public class Solution {
         result=new ArrayList<ArrayList<String>>();
     }
     public boolean isSafe(int[][] arr, int row, int col, int n){
-        //i=row and j=col is checked to check whether the current place dows not already contains a queen
-        //checking the upper left diagonal
+        //i=row and j=col is checked to assure whether the current place does not already contains a queen
+        //checking the upper-left diagonal for queen
         int i, j;
         for( i=row, j=col; i>=0 && j>=0; i--, j-- ){
             if(arr[i][j]==1){
@@ -21,14 +21,14 @@ public class Solution {
             }
         }
         
-        //checking the upper side
+        //checking the whether there is no queen in that column
         for(i=0; i<=row; i++){
             if(arr[i][col]==1){
                 return false;
             }
         }
         
-        //checking the lower left diagonal
+        //checking the upper-right diagonal for queens
         for(i=row, j=col; i>=0 && j<n; i--, j++){
             if(arr[i][j]==1){
                 return false;
@@ -51,14 +51,13 @@ public class Solution {
                 }
                 solveNQueenProblem(board, row+1, n);
                 //backtracking
-                board[row][i]=0;//reset the place to zero as of the queen is not placed here
+                //reset the position for the other permutation of n-queens solution
+                board[row][i]=0;
             }
             
         }
-        //return false;
     }
     public ArrayList<String> setResult(int[][] arr, int n){
-        //ArrayList<ArrayList<String>> output=new ArrayList<ArrayList<String>>(); 
         ArrayList<String> temp=new ArrayList<String>();
         for(int i=0; i<n; i++){
             StringBuilder str=new StringBuilder();
@@ -86,7 +85,6 @@ public class Solution {
     	}
     	
     	solveNQueenProblem(board, 0, n);
-    	
     	return result;
 	}
 	public void printResult(ArrayList<ArrayList<String>> arr){
